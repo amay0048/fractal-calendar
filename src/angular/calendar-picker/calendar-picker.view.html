@@ -1,0 +1,86 @@
+<p>Selected: {{vm.selectedDate}} <button ng-click="vm.toggleCalendar()">+</button></p>
+
+<!--<div class="multi-month-picker" ng-if="vm.isVisible" ng-switch on="vm.displayMode">
+    <div ng-switch-when="{{vm.modes.dayFromMonth}}">
+        DYNAMIC VALUE SWITCH
+    </div>
+    <div ng-switch-default>
+        {{vm.displayMode}}<br>
+        {{vm.modes.dayFromMonth}}
+    </div>
+</div>-->
+<div class="multi-month-picker" ng-if="vm.isVisible">
+    <div ng-if="(vm.displayMode === vm.modes.dayFromMonth)">
+        <div class="header-controls">
+            <button class="prev" ng-click="vm.prevMonths()">
+                &lt;
+            </button>
+            <button class="next" ng-click="vm.nextMonths()">
+                &gt;
+            </button>
+        </div>
+        <div class="body">
+            <table ng-repeat="month in vm.daysOfMonths track by $index" class="month-table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th colspan="5" ng-click="vm.switchMode(vm.modes.monthFromYear)">
+                            <button>
+                                {{vm.FORMATS.shortMonth[month[1][0].getMonth()]}}
+                                {{month[1][0].getFullYear()}}
+                            </button>
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th ng-repeat="d in vm.FORMATS.initialOfDay track by $index">
+                            {{d}}
+                        </th>
+                    </tr>
+                    <tr ng-repeat="week in month track by $index">
+                        <td ng-repeat="day in week track by $index" ng-click="vm.selectDateOfMonth(day)"
+                            ng-class="{selected: (day.toString() === vm.selectedDate.toString()), today: (day.toString() === vm.todaysDate.toString()), overflow: (day.getMonth() !== month[1][0].getMonth())}">
+                            {{day.getDate()}}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="footer-controls">
+            <button ng-click="vm.gotoToday()">Today</button>
+        </div>
+    </div>
+    <div ng-if="(vm.displayMode === vm.modes.monthFromYear)">
+        <div class="header-controls">
+            <button class="prev" ng-click="vm.prevYear()">
+                &lt;
+            </button>
+            <button class="next" ng-click="vm.nextYear()">
+                &gt;
+            </button>
+        </div>
+        <div class="body">
+            <table class="month-table">
+                <thead>
+                    <tr>
+                        <th colspan="3">
+                            {{vm.args[1]}}
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="quarter in vm.monthsOfYear track by $index">
+                        <td ng-repeat="month in quarter track by $index" ng-click="vm.selectMonthOfYear(month)">
+                            {{month}}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="footer-controls">
+            <button ng-click="vm.gotoToday()">Today</button>
+        </div>
+    </div>
+</div>

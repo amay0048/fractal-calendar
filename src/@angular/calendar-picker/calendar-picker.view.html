@@ -1,0 +1,79 @@
+<p>Selected: {{selectedDate}} <button (click)="toggleCalendar()">+</button></p>
+
+<div class="multi-month-picker" *ngIf="isVisible" [ngSwitch]="displayMode">
+    <div *ngSwitchCase="modes.dayFromMonth">
+        <div class="header-controls">
+            <button class="prev" (click)="prevMonths()">
+                &lt;
+            </button>
+            <button class="next" (click)="nextMonths()">
+                &gt;
+            </button>
+        </div>
+        <div class="body">
+            <table *ngFor="let month of daysOfMonths" class="month-table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th colspan="5" (click)="switchMode(modes.monthFromYear)">
+                            <button>
+                                {{FORMATS.shortMonth[month[1][0].getMonth()]}}
+                                {{month[1][0].getFullYear()}}
+                            </button>
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th *ngFor="let d of FORMATS.initialOfDay">
+                            {{d}}
+                        </th>
+                    </tr>
+                    <tr *ngFor="let week of month">
+                        <td *ngFor="let day of week" (click)="selectDateOfMonth(day)"
+                            [class.selected]="(day.toString() === selectedDate.toString())"
+                            [class.today]="(day.toString() === todaysDate.toString())"
+                            [class.overflow]="(day.getMonth() !== month[1][0].getMonth())">
+                            {{day.getDate()}}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="footer-controls">
+            <button (click)="gotoToday()">Today</button>
+        </div>
+    </div>
+    <div *ngSwitchCase="modes.monthFromYear">
+        <div class="header-controls">
+            <button class="prev" (click)="prevYear()">
+                &lt;
+            </button>
+            <button class="next" (click)="nextYear()">
+                &gt;
+            </button>
+        </div>
+        <div class="body">
+            <table class="month-table">
+                <thead>
+                    <tr>
+                        <th colspan="3">
+                            {{args[1]}}
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let quarter of monthsOfYear">
+                        <td *ngFor="let month of quarter" (click)="selectMonthOfYear(month)">
+                            {{month}}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="footer-controls">
+            <button (click)="gotoToday()">Today</button>
+        </div>
+    </div>
+</div>

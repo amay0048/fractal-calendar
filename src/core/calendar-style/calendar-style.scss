@@ -1,0 +1,51 @@
+$lr: 12px;
+$tb: 6px;
+
+fractal-calendar-picker {
+    .multi-month-picker {
+        position: relative;
+        border: 1px solid;
+        padding: $tb $lr;
+        display:inline-block;
+
+        .month-table {
+            display:inline-block;
+            margin-right:20px;
+            &:last-of-type{
+                margin-right:0
+            }
+            tfoot {
+                text-align: center;
+            }
+            td {
+                cursor: pointer;
+            }
+            .overflow {
+                background:lightgray;
+                opacity:0;
+                cursor: default;
+            }
+            .today {
+                border:1px lightslategrey solid;
+            }
+            .selected {
+                background:lightsteelblue;
+            }
+        }
+        .footer-controls {
+            text-align: center;
+        }
+        .header-controls {
+            .prev, .next {
+                position: absolute;
+                top: $tb+4px;
+            }
+            .prev {
+                left:$lr;
+            }
+            .next {
+                right:$lr;
+            }
+        }
+    }
+}

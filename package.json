@@ -1,0 +1,57 @@
+{
+  "name": "fractal-calendar",
+  "version": "1.0.0",
+  "description": "Calendar picker in both react and angular",
+  "main": "src/index.ts",
+  "scripts": {
+    "watch:dev:ng": "NODE_ENV=dev TARGET=angular webpack-dev-server -w",
+    "build:dev:ng": "NODE_ENV=dev TARGET=angular webpack",
+    "watch:prod:ng": "NODE_ENV=prod TARGET=angular webpack-dev-server -w -p",
+    "build:prod:ng": "NODE_ENV=prod TARGET=angular webpack -p",
+
+    "watch:dev": "NODE_ENV=dev TARGET=@angular webpack-dev-server -w",
+    "build:dev": "NODE_ENV=dev TARGET=@angular webpack",
+    "watch:prod": "NODE_ENV=prod TARGET=@angular webpack-dev-server -w -p",
+    "build:prod": "NODE_ENV=prod TARGET=@angular webpack -p",
+    
+    "test": "mocha -r ts-node/register src/**/*Test.ts"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/core-js": "^0.9.35",
+    "@types/hammerjs": "^2.0.34",
+    "@types/mocha": "^2.2.37",
+    "@types/node": "^6.0.59",
+    "@types/zone.js": "0.0.27",
+    "angular2-template-loader": "^0.6.0",
+    "css-loader": "^0.26.1",
+    "css-raw-loader": "^0.1.1",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "html-loader": "^0.4.4",
+    "html-webpack-plugin": "^2.26.0",
+    "mocha": "^3.2.0",
+    "node-sass": "^4.2.0",
+    "sass-loader": "^4.1.1",
+    "style-loader": "^0.13.1",
+    "ts-loader": "^1.3.3",
+    "ts-node": "^2.0.0",
+    "typescript": "^2.1.4",
+    "webpack": "^1.14.0",
+    "webpack-dev-server": "^1.16.2",
+    "webpack-merge": "^2.3.1",
+    "webpack-shell-plugin": "^0.5.0"
+  },
+  "dependencies": {
+    "@angular/common": "^2.4.3",
+    "@angular/compiler": "^2.4.3",
+    "@angular/core": "^2.4.3",
+    "@angular/platform-browser": "^2.4.3",
+    "@angular/platform-browser-dynamic": "^2.4.3",
+    "core-js": "^2.4.1",
+    "hammerjs": "^2.0.8",
+    "reflect-metadata": "^0.1.9",
+    "rxjs": "^5.0.3",
+    "zone.js": "^0.7.4"
+  }
+}

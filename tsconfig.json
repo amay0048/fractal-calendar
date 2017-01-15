@@ -1,0 +1,20 @@
+{
+    "compileOnSave": false,
+    "compilerOptions": {
+        "declaration": false,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "target": "es5",
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "noImplicitAny": true,
+        "removeComments": true,
+        "preserveConstEnums": true,
+        "outDir": "./www/js",
+        "sourceMap": true,
+        "suppressImplicitAnyIndexErrors": true
+    },
+    "angularCompilerOptions": {
+        "googleClosureOutput": true
+    }
+}
