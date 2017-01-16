@@ -159,4 +159,12 @@ export class CalendarService {
         var start = 3 * (quarter-1)
         return this.getMonths(this.MONTHS[start], 3)
     }
+    getMonthsOfYear():string[][] {
+        return [
+            this.getMonthsByQuarter(1),
+            this.getMonthsByQuarter(2),
+            this.getMonthsByQuarter(3),
+            this.getMonthsByQuarter(4)
+        ]
+    }
 }

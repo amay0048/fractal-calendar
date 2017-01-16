@@ -7,19 +7,19 @@ enum DisplayMode {
 }
 
 export class CalendarComponent {
-  protected daysOfMonths: Date[][][]
-  protected monthsOfYear: any[][]
-  protected isVisible = true
-  protected args: any[]
   protected todaysDate: Date
-  protected selectedDate: Date
-  protected modes = DisplayMode
-  protected displayMode = this.modes.dayFromMonth
 
-  protected FORMATS: IFormats
-  // public provider: ICalendarService
-
+  args: any[]
+  daysOfMonths: Date[][][]
+  monthsOfYear: any[][]
+  isVisible = true
+  modes = DisplayMode
+  displayMode = this.modes.dayFromMonth
+  selectedDate: Date
+  
+  FORMATS: IFormats
   pageLength = 1
+
   constructor(public provider:ICalendarService) {
     this.FORMATS = this.provider.getFormats()
   }
@@ -72,10 +72,12 @@ export class CalendarComponent {
   populateCalendar() {
       switch (this.displayMode) {
         case this.modes.monthFromYear:
+          // State 2
           this.monthsOfYear = this.provider.getMonthsOfYear()
           break
         case this.modes.dayFromMonth:
         default:
+          // State 1
           var [m, y, l] = this.args;
           this.daysOfMonths = this.provider.getWeeksOfMonths(<string>m, <number>y, <number>l)
       }
