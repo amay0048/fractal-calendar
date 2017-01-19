@@ -7,7 +7,7 @@ enum DisplayMode {
 }
 
 export class CalendarComponent {
-  protected todaysDate: Date
+  todaysDate: Date
 
   args: any[]
   daysOfMonths: Date[][][]
@@ -21,6 +21,7 @@ export class CalendarComponent {
   pageLength = 1
 
   constructor(public provider:ICalendarService) {
+    // In react world, this isn't being deps injected, so this is never being called
     this.FORMATS = this.provider.getFormats()
   }
 
@@ -34,9 +35,10 @@ export class CalendarComponent {
     this.populateCalendar()
   }
   reset(abandonSelected = false) {
-    var d = new Date()
+    let d = new Date()
     if (abandonSelected) this.selectedDate = new Date(d.getFullYear(), d.getMonth(), d.getDate())
-    this.args = [this.FORMATS.shortMonth[d.getMonth()],d.getFullYear(),this.pageLength]
+    // this.args = [this.FORMATS.shortMonth[d.getMonth()],d.getFullYear(),this.pageLength]
+    this.args = ['jan',d.getFullYear(),this.pageLength]
     this.todaysDate = new Date(d.getFullYear(), d.getMonth(), d.getDate())
     this.populateCalendar()
   }
@@ -78,7 +80,7 @@ export class CalendarComponent {
         case this.modes.dayFromMonth:
         default:
           // State 1
-          var [m, y, l] = this.args;
+          let [m, y, l] = this.args;
           this.daysOfMonths = this.provider.getWeeksOfMonths(<string>m, <number>y, <number>l)
       }
   }

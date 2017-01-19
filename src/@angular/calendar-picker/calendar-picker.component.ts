@@ -1,6 +1,6 @@
 import '../../core/calendar-style/calendar-style.scss'
-import { Component, Inject, Input, ElementRef } from '@angular/core'
-import { CalendarProvider, IFormats } from './calendar-picker.provider'
+import { Component, Input, ElementRef } from '@angular/core'
+import { CalendarProvider } from './calendar-picker.provider'
 import { CalendarComponent } from '../../core/calendar-component/calendar-component'
 
 enum DisplayMode {

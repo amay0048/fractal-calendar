@@ -1,7 +1,7 @@
 import '../../core/calendar-style/calendar-style.scss'
 import * as React from 'react'
 import { CalendarComponent } from '../../core/calendar-component/calendar-component'
-import { CalendarService, ICalendarService } from '../../core/calendar-service/calendar-service'
+import { CalendarService } from '../../core/calendar-service/calendar-service'
 
 import { DayFromMonthPicker } from './DayFromMonthPicker.view'
 import { MonthFromYear } from './MonthFromYearPicker.view'
@@ -33,9 +33,13 @@ class ViewModel extends CalendarComponent {
     }
 }
 
+// Mixins may be a better pattern to achieve the desired results: https://www.typescriptlang.org/docs/handbook/mixins.html
+
+let calendarService = new CalendarService()
+
 export class CalendarPicker extends React.Component<CalendarPickerProps, CalendarPickerState> {
     public static defaultProps: CalendarPickerProps = { pageLength:1 }
-    private vm = new ViewModel(new CalendarService())
+    private vm: ViewModel
 
     componentWillMount() {
         this.vm.pageLength = this.props.pageLength
@@ -48,6 +52,7 @@ export class CalendarPicker extends React.Component<CalendarPickerProps, Calenda
 
     constructor(props: CalendarPickerProps) {
         super(props)
+        let controller = new ViewModel(calendarService)
 
         // TODO: Surely there is a object merge function which will handle this, 
         // otherwise explore return new ViewModel()...

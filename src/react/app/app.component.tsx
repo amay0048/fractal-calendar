@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { CalendarPicker } from '../calendar-picker/CalendarPicker.component'
+import { CalendarPicker } from '../calendar-picker/CalendarPicker.viewModel'
 
 export class App extends React.Component<undefined, undefined> {
     render() {
