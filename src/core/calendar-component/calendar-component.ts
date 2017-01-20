@@ -21,6 +21,7 @@ export class CalendarComponent {
 
   pageLength = 1
   constructor(public provider:ICalendarService) {
+    // In react world, this isn't being deps injected, so this is never being called
     this.FORMATS = this.provider.getFormats()
   }
 
@@ -34,9 +35,10 @@ export class CalendarComponent {
     this.populateCalendar()
   }
   reset(abandonSelected = false) {
-    var d = new Date()
+    let d = new Date()
     if (abandonSelected) this.selectedDate = new Date(d.getFullYear(), d.getMonth(), d.getDate())
-    this.args = [this.FORMATS.shortMonth[d.getMonth()],d.getFullYear(),this.pageLength]
+    // this.args = [this.FORMATS.shortMonth[d.getMonth()],d.getFullYear(),this.pageLength]
+    this.args = ['jan',d.getFullYear(),this.pageLength]
     this.todaysDate = new Date(d.getFullYear(), d.getMonth(), d.getDate())
     this.populateCalendar()
   }
@@ -76,7 +78,12 @@ export class CalendarComponent {
           break
         case this.modes.dayFromMonth:
         default:
+<<<<<<< HEAD
           var [m, y, l] = this.args;
+=======
+          // State 1
+          let [m, y, l] = this.args;
+>>>>>>> dbd867ce441bb4832730c9d9689078cb99f368a5
           this.daysOfMonths = this.provider.getWeeksOfMonths(<string>m, <number>y, <number>l)
       }
   }
