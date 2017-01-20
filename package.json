@@ -4,11 +4,6 @@
   "description": "Calendar picker in both react and angular",
   "main": "src/index.ts",
   "scripts": {
-    "watch:dev:react": "NODE_ENV=dev TARGET=react webpack-dev-server -w",
-    "build:dev:react": "NODE_ENV=dev TARGET=react webpack",
-    "watch:prod:react": "NODE_ENV=prod TARGET=react webpack-dev-server -w -p",
-    "build:prod:react": "NODE_ENV=prod TARGET=react webpack -p",
-
     "watch:dev:ng": "NODE_ENV=dev TARGET=angular webpack-dev-server -w",
     "build:dev:ng": "NODE_ENV=dev TARGET=angular webpack",
     "watch:prod:ng": "NODE_ENV=prod TARGET=angular webpack-dev-server -w -p",
@@ -18,7 +13,7 @@
     "build:dev": "NODE_ENV=dev TARGET=@angular webpack",
     "watch:prod": "NODE_ENV=prod TARGET=@angular webpack-dev-server -w -p",
     "build:prod": "NODE_ENV=prod TARGET=@angular webpack -p",
-
+    
     "test": "mocha -r ts-node/register src/**/*Test.ts"
   },
   "author": "",
@@ -29,8 +24,6 @@
     "@types/hammerjs": "^2.0.34",
     "@types/mocha": "^2.2.37",
     "@types/node": "^6.0.59",
-    "@types/react": "^15.0.0",
-    "@types/react-dom": "^0.14.20",
     "@types/zone.js": "0.0.27",
     "angular2-template-loader": "^0.6.0",
     "css-loader": "^0.26.1",
@@ -59,8 +52,6 @@
     "angular": "^1.6.1",
     "core-js": "^2.4.1",
     "hammerjs": "^2.0.8",
-    "react": "^15.4.2",
-    "react-dom": "^15.4.2",
     "reflect-metadata": "^0.1.9",
     "rxjs": "^5.0.3",
     "zone.js": "^0.7.4"
