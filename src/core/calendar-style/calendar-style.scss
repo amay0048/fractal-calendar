@@ -1,6 +1,11 @@
 $lr: 12px;
 $tb: 6px;
 
+.calendar-icon {
+    width:18px;
+    margin-bottom:-2px;
+    cursor:pointer;
+}
 .fractal-calendar-picker {
     .multi-month-picker {
         position: relative;

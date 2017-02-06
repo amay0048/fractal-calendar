@@ -2,4 +2,4 @@
 
 npm test
 cp -r img www/react
-cp -r fonts www/react
+# cp -r fonts www/react

@@ -88,7 +88,9 @@ export class CalendarPicker extends React.Component<CalendarPickerProps, Calenda
     render() {
         return (
             <div className="fractal-calendar-picker">
-                <p>Selected: {this.state.selectedDate.toString()} <button onClick={this.toggleCalendar}>+</button></p>
+                <p>Selected: {this.state.selectedDate.toString()} 
+                    <img className="calendar-icon" src="img/calendar_icon.svg" onClick={this.toggleCalendar} />
+                </p>
                 
                 {this.state.isVisible ? (
                     <div>

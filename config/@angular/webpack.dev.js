@@ -40,7 +40,6 @@ var baseConfig = {
                 test: /\.ts?$/,
                 loader: 'ts',
                 query: {
-
                     transpileOnly: true,
                     isolatedModules: true,
                     silent: true
@@ -55,15 +54,15 @@ var baseConfig = {
                 ]
             },
             // File loader will need to be reconfigured once we being loading assets beyond css
-            {
-                test: /\.(png|jpe?g|gif|woff|woff2|ttf|eot|ico|svg)$/,
-                // loader: 'file?name=assets/[name].[hash].[ext]'
-                loader: 'file?name=assets/[name].[ext]'
-            },
-            {
-                test: /\.(svg)$/,
-                loader: 'raw'
-            },
+            // {
+            //     test: /\.(png|jpe?g|gif|woff|woff2|ttf|eot|ico|svg)$/,
+            //     // loader: 'file?name=assets/[name].[hash].[ext]'
+            //     loader: 'file?name=assets/[name].[ext]'
+            // },
+            // {
+            //     test: /\.(svg)$/,
+            //     loader: 'raw'
+            // },
             {
                 test: /\.css$/,
                 loader: ExtractTextPlugin.extract('style', 'css?sourceMap')
@@ -93,13 +92,14 @@ var baseConfig = {
             [/\*/, /(?:)/],
             [/\[?\(?/, /(?:)/]
         ],
-        customAttrAssign: [/\)?\]?=/]
+        customAttrAssign: [/\)?\]?=/],
+        attrs: false
     },
     plugins: [
-        new webpack.ContextReplacementPlugin(
-            /angular(\\|\/)core(\\|\/)(esm(\\|\/)src|src)(\\|\/)linker/,
-            __dirname
-        ),
+        // new webpack.ContextReplacementPlugin(
+        //     /angular(\\|\/)core(\\|\/)(esm(\\|\/)src|src)(\\|\/)linker/,
+        //     __dirname
+        // ),
         new ExtractTextPlugin('css/[name].css'),
         new webpack.optimize.CommonsChunkPlugin({
             name: ['main', 'vendor']
@@ -125,6 +125,7 @@ baseConfig.plugins.push(new WebpackShellPlugin({
         `sh ${buildScripts.start}`,
     ],
     onBuildEnd: [
+        'echo "Webpack End"',
         `sh ${buildScripts.end}`,
     ],
     onBuildExit: [

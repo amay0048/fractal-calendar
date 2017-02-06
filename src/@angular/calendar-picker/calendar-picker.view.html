@@ -1,4 +1,6 @@
-<p>Selected: {{selectedDate}} <button (click)="toggleCalendar()">+</button></p>
+<p>Selected: {{selectedDate}} 
+    <img class="calendar-icon" src="img/calendar_icon.svg" (click)="toggleCalendar()">
+</p>
 
 <div class="multi-month-picker" *ngIf="isVisible" [ngSwitch]="displayMode">
     <div *ngSwitchCase="modes.dayFromMonth">

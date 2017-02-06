@@ -93,7 +93,8 @@ var baseConfig = {
             [/\*/, /(?:)/],
             [/\[?\(?/, /(?:)/]
         ],
-        customAttrAssign: [/\)?\]?=/]
+        customAttrAssign: [/\)?\]?=/],
+        attrs: false
     },
     plugins: [
         new webpack.ContextReplacementPlugin(
