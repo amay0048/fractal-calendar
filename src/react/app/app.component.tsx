@@ -1,7 +1,7 @@
 import * as React from 'react'
-import { CalendarPicker } from '../calendar-picker/CalendarPicker.viewModel'
+import { CalendarPicker } from '../calendar-picker/CalendarPicker.component'
 
-export class App extends React.Component<undefined, undefined> {
+export class FractalApp extends React.Component<undefined, undefined> {
     render() {
         return (
             <div>
@@ -12,3 +12,10 @@ export class App extends React.Component<undefined, undefined> {
         )
     }
 }
+
+import * as ReactDOM from 'react-dom'
+
+ReactDOM.render(
+  <FractalApp />,
+  document.getElementById('fractal-app')
+)

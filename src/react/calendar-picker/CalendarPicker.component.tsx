@@ -18,6 +18,8 @@ interface CalendarPickerState {
     daysOfMonths: Date[][][]
     monthsOfYear: string[][]
     selectedDate: Date
+    modes:any
+    FORMATS:any
 }
 
 class ViewModel extends CalendarComponent {
@@ -28,97 +30,69 @@ class ViewModel extends CalendarComponent {
             args: this.args,
             daysOfMonths: this.daysOfMonths,
             monthsOfYear: this.monthsOfYear,
-            selectedDate: this.selectedDate
+            selectedDate: this.selectedDate,
+            modes: this.modes,
+            FORMATS: this.FORMATS
         }
     }
 }
-
-// Mixins may be a better pattern to achieve the desired results: https://www.typescriptlang.org/docs/handbook/mixins.html
 
 let calendarService = new CalendarService()
 
 export class CalendarPicker extends React.Component<CalendarPickerProps, CalendarPickerState> {
     public static defaultProps: CalendarPickerProps = { pageLength:1 }
-    private vm: ViewModel
 
-    componentWillMount() {
-        this.vm.pageLength = this.props.pageLength
-        this.vm.onInit()
-        this.setState(this.vm.getState())
-    }
-    componentWillReceiveProps(props:CalendarPickerProps) {
-        this.vm.pageLength = props.pageLength
-    }
+    componentWillMount:()=>void
+    componentWillReceiveProps:(props:CalendarPickerProps)=>void
 
     constructor(props: CalendarPickerProps) {
         super(props)
         let controller = new ViewModel(calendarService)
 
-        // TODO: Surely there is a object merge function which will handle this, 
-        // otherwise explore return new ViewModel()...
-        this.toggle = this.toggle.bind(this)
-        this.switchMode = this.switchMode.bind(this)
-        this.goToToday = this.goToToday.bind(this)
+        Object.getOwnPropertyNames(CalendarComponent.prototype).forEach(name => {
+            this[name] = (function(controller, target) {
+                return function(){
+                    controller[name].apply(controller, arguments)
+                    this.setState(controller.getState())
+                }.bind(target)
+            })(controller, this)
+        })
 
-        this.selectDateOfMonth = this.selectDateOfMonth.bind(this)
-        this.prevMonths = this.prevMonths.bind(this)
-        this.nextMonths = this.nextMonths.bind(this)
-
-        this.selectMonthOfYear = this.selectMonthOfYear.bind(this)
-        this.prevYear = this.prevYear.bind(this)
-        this.nextYear = this.nextYear.bind(this)
-    }
-
-    toggle(){
-        this.vm.toggleCalendar()
-        this.setState(this.vm.getState())
-    }
-    switchMode(mode:number) {
-        this.vm.switchMode(mode)
-        this.setState(this.vm.getState())
-    }
-    goToToday() {
-        this.vm.gotoToday()
-        this.setState(this.vm.getState())
+        this.componentWillMount = (function(controller, target){
+            return function(){
+                controller.pageLength = this.props.pageLength
+                controller.onInit()
+                this.setState(controller.getState())
+            }.bind(target)
+        })(controller, this)
+        
+        this.componentWillReceiveProps = (function(controller, target){
+            return (function(){
+                controller.pageLength = this.props.pagelength
+                this.setState(controller.getState())
+            }).bind(target)
+        })(controller, this)
     }
 
-    // MonthFromYearPicker
-    prevMonths() {
-        this.vm.prevMonths()
-        this.setState(this.vm.getState())
-    }
-    nextMonths() {
-        this.vm.nextMonths()
-        this.setState(this.vm.getState())
-    }
-    selectDateOfMonth(date: Date) {
-        this.vm.selectDateOfMonth(date)
-        this.setState(this.vm.getState())
-        if (this.props.onSelectDate instanceof Function) this.props.onSelectDate(this.state.selectedDate)
-    }
+    toggleCalendar: ()=>void
+    selectDateOfMonth: ()=>void
+    prevMonths: ()=>void
+    nextMonths: ()=>void
+    switchMode: ()=>void
+    gotoToday: ()=>void
 
-    // DayFromMonthPicker
-    nextYear() {
-        this.vm.nextYear()
-        this.setState(this.vm.getState())
-    }
-    prevYear() {
-        this.vm.prevYear()
-        this.setState(this.vm.getState())
-    }
-    selectMonthOfYear(month:string) {
-        this.vm.selectMonthOfYear(month)
-        this.setState(this.vm.getState())
-    }
+    selectMonthOfYear: ()=>void
+    prevYear: ()=>void
+    nextYear: ()=>void
 
     render() {
         return (
             <div className="fractal-calendar-picker">
-                <p>Selected: {this.vm.selectedDate.toString()} <button onClick={this.toggle}>+</button></p>
+                <p>Selected: {this.state.selectedDate.toString()} <button onClick={this.toggleCalendar}>+</button></p>
                 
                 {this.state.isVisible ? (
                     <div>
-                        {this.state.displayMode === this.vm.modes.dayFromMonth ? (
+                        {this.state.displayMode === this.state.modes.dayFromMonth ? (
                             <DayFromMonthPicker 
                                 selectedDate={this.state.selectedDate}
                                 selectDateOfMonth={this.selectDateOfMonth}
@@ -126,13 +100,13 @@ export class CalendarPicker extends React.Component<CalendarPickerProps, Calenda
                                 prevMonths={this.prevMonths}
                                 nextMonths={this.nextMonths}
 
-                                FORMATS={this.vm.FORMATS}
-                                modes={this.vm.modes}
+                                FORMATS={this.state.FORMATS}
+                                modes={this.state.modes}
                                 switchMode={this.switchMode}
-                                goToToday={this.goToToday}
+                                goToToday={this.gotoToday}
                             />
                         ) : (null)}
-                        {this.state.displayMode === this.vm.modes.monthFromYear ? (
+                        {this.state.displayMode === this.state.modes.monthFromYear ? (
                             <MonthFromYear 
                                 selectMonthOfYear={this.selectMonthOfYear}
                                 displayYear={this.state.args[1]}
@@ -140,10 +114,10 @@ export class CalendarPicker extends React.Component<CalendarPickerProps, Calenda
                                 prevYear={this.prevYear}
                                 nextYear={this.prevMonths}
 
-                                FORMATS={this.vm.FORMATS}
-                                modes={this.vm.modes}
+                                FORMATS={this.state.FORMATS}
+                                modes={this.state.modes}
                                 switchMode={this.switchMode}
-                                goToToday={this.goToToday}
+                                goToToday={this.gotoToday}
                             />
                         ) : (null)}
                     </div>

@@ -12,7 +12,8 @@
         "preserveConstEnums": true,
         "outDir": "./www/js",
         "sourceMap": true,
-        "suppressImplicitAnyIndexErrors": true
+        "suppressImplicitAnyIndexErrors": true,
+        "jsx": "react"
     },
     "angularCompilerOptions": {
         "googleClosureOutput": true

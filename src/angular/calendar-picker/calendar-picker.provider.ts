@@ -1,16 +1,5 @@
-import { CalendarService as Service, IFormats } from '../../core/calendar-service/calendar-service'
-export { IFormats }
-
-export class CalendarProviderService extends Service { 
-    getMonthsOfYear():any[][] {
-        return [
-            this.getMonthsByQuarter(1),
-            this.getMonthsByQuarter(2),
-            this.getMonthsByQuarter(3),
-            this.getMonthsByQuarter(4)
-        ]
-    }
-}
+import { CalendarService as CalendarProviderService, IFormats } from '../../core/calendar-service/calendar-service'
+export { IFormats, CalendarProviderService }
 
 export class CalendarProvider implements ng.IServiceProvider {
     $get() {

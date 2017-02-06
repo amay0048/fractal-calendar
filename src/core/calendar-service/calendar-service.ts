@@ -24,7 +24,7 @@ export interface ICalendarService {
     getMonthsByQuarter(quarter:number):string[]
 }
 
-export class CalendarService {
+export class CalendarService implements ICalendarService {
     // Inital of day
     private IOD = ['S', 'M', 'T', 'W', 'T', 'F', 'S']
     private DOW = DayOfWeek
@@ -158,5 +158,14 @@ export class CalendarService {
         if ( 1 > quarter || quarter > 4) throw 'Invalid quarter passed to getMonthsByQuarter'
         var start = 3 * (quarter-1)
         return this.getMonths(this.MONTHS[start], 3)
+    }
+    getMonthsOfYear():any[][] {
+        // TODO requires a better implementation
+        return [
+            this.getMonthsByQuarter(1),
+            this.getMonthsByQuarter(2),
+            this.getMonthsByQuarter(3),
+            this.getMonthsByQuarter(4)
+        ]
     }
 }
