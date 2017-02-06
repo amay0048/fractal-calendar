@@ -1,4 +1,7 @@
 
 **/node_modules/
 **/.idea/
+**/.vscode/
 **/www/
+
+npm-debug.log
