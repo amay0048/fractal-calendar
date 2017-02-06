@@ -11,7 +11,8 @@ enum DisplayMode {
 
 @Component({
   selector: 'fractal-calendar-picker',
-  templateUrl: './calendar-picker.view.html'
+  templateUrl: './calendar-picker.view.html',
+  host: {'class': 'fractal-calendar-picker'}
 })
 export class CalendarPicker extends CalendarComponent {
   @Input() pageLength = 1
