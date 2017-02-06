@@ -15,9 +15,11 @@ interface DayFromMonthPickerProps {
 function getClassOfDay(day:Date, month:Date[][], selectedDate:Date) {
     let ret = ''
     let d = new Date()
-    if (d.getDate() === day.getDate() && d.getMonth() === day.getMonth()) ret += ' today'
+    d = new Date(d.getFullYear(), d.getMonth(), d.getDate())
+    if (d.getTime() === day.getTime()) ret += ' today'
     if (month[1][0].getMonth() !== day.getMonth()) ret += ' overflow'
-    if (day === selectedDate) ret += ' selected'
+    // http://stackoverflow.com/questions/492994/compare-two-dates-with-javascript
+    if (day.getTime() === selectedDate.getTime()) ret += ' selected'
     return ret.trim()
 }
 

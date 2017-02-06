@@ -43,7 +43,7 @@
                     </tr>
                     <tr ng-repeat="week in month track by $index">
                         <td ng-repeat="day in week track by $index" ng-click="vm.selectDateOfMonth(day)"
-                            ng-class="{selected: (day.toString() === vm.selectedDate.toString()), today: (day.toString() === vm.todaysDate.toString()), overflow: (day.getMonth() !== month[1][0].getMonth())}">
+                            ng-class="{selected: (day.getTime() === vm.selectedDate.getTime()), today: (day.getTime() === vm.todaysDate.getTime()), overflow: (day.getMonth() !== month[1][0].getMonth())}">
                             {{day.getDate()}}
                         </td>
                     </tr>

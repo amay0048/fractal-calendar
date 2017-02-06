@@ -38,7 +38,7 @@ export class CalendarComponent {
     let d = new Date()
     if (abandonSelected) this.selectedDate = new Date(d.getFullYear(), d.getMonth(), d.getDate())
     // this.args = [this.FORMATS.shortMonth[d.getMonth()],d.getFullYear(),this.pageLength]
-    this.args = ['jan',d.getFullYear(),this.pageLength]
+    this.args = [this.FORMATS.shortMonth[d.getMonth()], d.getFullYear(), this.pageLength]
     this.todaysDate = new Date(d.getFullYear(), d.getMonth(), d.getDate())
     this.populateCalendar()
   }

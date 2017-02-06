@@ -34,8 +34,8 @@
                     </tr>
                     <tr *ngFor="let week of month">
                         <td *ngFor="let day of week" (click)="selectDateOfMonth(day)"
-                            [class.selected]="(day.toString() === selectedDate.toString())"
-                            [class.today]="(day.toString() === todaysDate.toString())"
+                            [class.selected]="(day.getTime() === selectedDate.getTime())"
+                            [class.today]="(day.getTime() === todaysDate.getTime())"
                             [class.overflow]="(day.getMonth() !== month[1][0].getMonth())">
                             {{day.getDate()}}
                         </td>
