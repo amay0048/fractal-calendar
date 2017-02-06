@@ -23,6 +23,10 @@ export class CalendarPickerComponent implements ng.IComponentOptions {
   template = require('./calendar-picker.view.html')
   controller = CalendarPickerController
   controllerAs = 'vm'
+  bindings = {
+    pageLength: '<',
+    selectedDate: '=?'
+  }
 }
 // this property exists via modification of global Function interface
 CalendarPickerComponent.componentSelector = toCamelCase('fractal-calendar-picker')

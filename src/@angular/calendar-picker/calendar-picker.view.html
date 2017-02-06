@@ -33,7 +33,7 @@
                         </th>
                     </tr>
                     <tr *ngFor="let week of month">
-                        <td *ngFor="let day of week" (click)="selectDateOfMonth(day)"
+                        <td *ngFor="let day of week" (click)="onSelectDateOfMonth(day)"
                             [class.selected]="(day.getTime() === selectedDate.getTime())"
                             [class.today]="(day.getTime() === todaysDate.getTime())"
                             [class.overflow]="(day.getMonth() !== month[1][0].getMonth())">
@@ -44,7 +44,7 @@
             </table>
         </div>
         <div class="footer-controls">
-            <button (click)="gotoToday()">Today</button>
+            <button (click)="onGotoToday()">Today</button>
         </div>
     </div>
     <div *ngSwitchCase="modes.monthFromYear">
@@ -75,7 +75,7 @@
             </table>
         </div>
         <div class="footer-controls">
-            <button (click)="gotoToday()">Today</button>
+            <button (click)="onGotoToday()">Today</button>
         </div>
     </div>
 </div>

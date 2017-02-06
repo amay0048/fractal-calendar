@@ -4,8 +4,14 @@ import { Component } from '@angular/core';
   selector: 'fractal-app',
   template: `
     <h1>Fractal Datepicker: @angular</h1>
-    <fractal-calendar-picker></fractal-calendar-picker>
+    <h2>Example output: {{selectedDate}}</h2>
+    <fractal-calendar-picker (selectDateEmitter)="onSelectDate($event)"></fractal-calendar-picker>
     <fractal-calendar-picker [pageLength]="3"></fractal-calendar-picker>
   `
 })
-export class AppComponent { }
+export class AppComponent {
+  selectedDate:Date
+  onSelectDate(date:Date){
+    this.selectedDate = date
+  }
+}
