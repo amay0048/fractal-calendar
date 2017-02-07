@@ -1,7 +1,7 @@
 import '../../core/calendar-style/calendar-style.scss'
 import * as React from 'react'
+import { calendarService } from './CalendarService'
 import { CalendarComponent } from '../../core/calendar-component/calendar-component'
-import { CalendarService } from '../../core/calendar-service/calendar-service'
 
 import { DayFromMonthPicker } from './DayFromMonthPicker.view'
 import { MonthFromYear } from './MonthFromYearPicker.view'
@@ -22,6 +22,8 @@ interface CalendarPickerState {
     FORMATS:any
 }
 
+// In React, component state is write only, I've extended the core component
+// with a react specific function that allows me to utalize the native React method
 class ViewModel extends CalendarComponent {
     getState():CalendarPickerState {
         return {
@@ -36,8 +38,6 @@ class ViewModel extends CalendarComponent {
         }
     }
 }
-
-let calendarService = new CalendarService()
 
 export class CalendarPicker extends React.Component<CalendarPickerProps, CalendarPickerState> {
     public static defaultProps: CalendarPickerProps = { pageLength:1 }

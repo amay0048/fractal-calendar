@@ -1,3 +1,9 @@
+/**
+ * This component is designed to create a data structure to support
+ * calendar display functionality. See the ./test/data/{function}
+ * for multiple test data sets for each function
+ */
+
 export interface IFormats {
     initialOfDay: string[]
     shortDay: any
