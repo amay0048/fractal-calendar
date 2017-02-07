@@ -42,6 +42,8 @@ class ViewModel extends CalendarComponent {
     }
 }
 
+// React components extend the Component class, currently you can only extend from 
+// a single class, which cases some issues with reusing the core component class
 export class CalendarPicker extends React.Component<CalendarPickerProps, CalendarPickerState> {
     public static defaultProps: CalendarPickerProps = { pageLength:1 }
 
@@ -95,6 +97,7 @@ export class CalendarPicker extends React.Component<CalendarPickerProps, Calenda
     prevYear: ()=>void
     nextYear: ()=>void
 
+    // The tsconfig.json file needs to an extra property to support jsx syntax
     render() {
         return (
             <div className="fractal-calendar-picker">

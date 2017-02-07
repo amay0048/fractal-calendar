@@ -1,6 +1,6 @@
 import '../../core/calendar-style/calendar-style.scss'
 import { Component, Inject, Input, Output, EventEmitter } from '@angular/core'
-import { CalendarProvider, IFormats } from './calendar-picker.provider'
+import { CalendarProvider } from './calendar-picker.provider'
 import { CalendarComponent } from '../../core/calendar-component/calendar-component'
 
 enum DisplayMode {
@@ -14,6 +14,8 @@ enum DisplayMode {
 @Component({
   selector: 'fractal-calendar-picker',
   templateUrl: './calendar-picker.view.html',
+  // React doesn't register custom elements, so we need this
+  // so that we can reuse the css
   host: {'class': 'fractal-calendar-picker'}
 })
 export class CalendarPicker extends CalendarComponent {

@@ -8,6 +8,7 @@ import { CalendarProvider } from './calendar-picker.provider'
 class CalendarPickerController extends CalendarComponent implements ng.IComponentController {
   constructor(public provider: ICalendarService, $element: any){
     super(provider)
+    // Add the class to the host so we can support the core css
     $element.addClass('fractal-calendar-picker')
   }
   $onInit() {
@@ -25,8 +26,10 @@ export class CalendarPickerComponent implements ng.IComponentOptions {
   controllerAs = 'vm'
   bindings = {
     pageLength: '<',
+    // optional 2 way binding for date
     selectedDate: '=?'
   }
 }
 // this property exists via modification of global Function interface
+// toCamelCase helps me find the compontns using the html syntax
 CalendarPickerComponent.componentSelector = toCamelCase('fractal-calendar-picker')

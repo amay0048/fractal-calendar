@@ -1,5 +1,5 @@
 import { CalendarService as CalendarProviderService, IFormats } from '../../core/calendar-service/calendar-service'
-export { IFormats, CalendarProviderService }
+export { CalendarProviderService }
 
 export class CalendarProvider implements ng.IServiceProvider {
     $get() {

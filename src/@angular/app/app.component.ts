@@ -13,5 +13,6 @@ export class AppComponent {
   selectedDate:Date
   onSelectDate(date:Date){
     this.selectedDate = date
+    console.log('Scope Watch for Date Change: ' + date);
   }
 }
