@@ -11,6 +11,9 @@ interface CalendarPickerProps {
     onSelectDate?: (date:Date)=>void
 }
 
+// Create an interface for the controller properties that
+// make up the component state (these are used in conditional)
+// logic in the render function, or by the child views
 interface CalendarPickerState { 
     isVisible: boolean
     displayMode:number
@@ -47,17 +50,21 @@ export class CalendarPicker extends React.Component<CalendarPickerProps, Calenda
 
     constructor(props: CalendarPickerProps) {
         super(props)
+        // instiantiate controller for this instance
         let controller = new ViewModel(calendarService)
 
+        // Bind the controller functions to the component
         Object.getOwnPropertyNames(CalendarComponent.prototype).forEach(name => {
             this[name] = (function(controller, target) {
                 return function(){
                     controller[name].apply(controller, arguments)
+                    // Update the component state after an event
                     this.setState(controller.getState())
                 }.bind(target)
             })(controller, this)
         })
 
+        // Run component init on mount
         this.componentWillMount = (function(controller, target){
             return function(){
                 controller.pageLength = this.props.pageLength
@@ -66,6 +73,7 @@ export class CalendarPicker extends React.Component<CalendarPickerProps, Calenda
             }.bind(target)
         })(controller, this)
         
+        // Update the controller props if new values are recieved
         this.componentWillReceiveProps = (function(controller, target){
             return (function(){
                 controller.pageLength = this.props.pagelength
@@ -74,6 +82,8 @@ export class CalendarPicker extends React.Component<CalendarPickerProps, Calenda
         })(controller, this)
     }
 
+    // Function declarations to match the implementations, these 
+    // will be populated when the controller is bound in the constructor
     toggleCalendar: ()=>void
     selectDateOfMonth: ()=>void
     prevMonths: ()=>void
