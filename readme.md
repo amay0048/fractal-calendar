@@ -7,6 +7,7 @@
 ```
 brew install node
 brew install libsass
+npm install
 ```
 
 ## Directory Structure
