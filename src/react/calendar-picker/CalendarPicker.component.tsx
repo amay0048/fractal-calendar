@@ -50,14 +50,19 @@ export class CalendarPicker extends React.Component<CalendarPickerProps, Calenda
     componentWillMount:()=>void
     componentWillReceiveProps:(props:CalendarPickerProps)=>void
 
-    constructor(props: CalendarPickerProps) {
+    constructor(public props: CalendarPickerProps) {
         super(props)
         // instiantiate controller for this instance
         let controller = new ViewModel(calendarService)
 
         // Bind the controller functions to the component
         Object.getOwnPropertyNames(CalendarComponent.prototype).forEach(name => {
-            this[name] = (function(controller, target) {
+            switch(name) {
+                case 'selectDateOfMonth':
+                case 'gotoToday':
+                    return;
+            }
+            this[name] = ((controller, target) => {
                 return function(){
                     controller[name].apply(controller, arguments)
                     // Update the component state after an event
@@ -65,6 +70,25 @@ export class CalendarPicker extends React.Component<CalendarPickerProps, Calenda
                 }.bind(target)
             })(controller, this)
         })
+
+        this.selectDateOfMonth = (function(controller, target){
+            return function(date:Date){
+                controller.selectDateOfMonth(date)
+                this.setState(controller.getState())
+                // pass the date back to the parent component
+                if (this.props.onSelectedDate)
+                    this.props.onSelectDate(this.state.selectedDate)
+            }.bind(target)
+        })(controller, this)
+
+        this.gotoToday = (function(controller, target){
+            return function(){
+                controller.gotoToday()
+                this.setState(controller.getState())
+                if (this.props.onSelectedDate)
+                    this.props.onSelectDate(this.state.selectedDate)
+            }.bind(target)
+        })(controller, this)
 
         // Run component init on mount
         this.componentWillMount = (function(controller, target){

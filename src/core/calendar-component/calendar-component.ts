@@ -21,7 +21,7 @@ export class CalendarComponent {
 
   pageLength = 1
   constructor(public provider:ICalendarService) {
-    // In react world, this isn't being deps injected, so this is never being called
+    // In react world, this isn't being deps injected, so must be called explicitly
     this.FORMATS = this.provider.getFormats()
   }
 
