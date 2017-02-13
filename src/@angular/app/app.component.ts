@@ -7,6 +7,7 @@ import { Component } from '@angular/core';
     <h2>Example output: {{selectedDate}}</h2>
     <fractal-calendar-picker (selectDateEmitter)="onSelectDate($event)"></fractal-calendar-picker>
     <fractal-calendar-picker [pageLength]="3"></fractal-calendar-picker>
+    <div asbDraggable="true">Hello draggable</div>
   `
 })
 export class AppComponent {
